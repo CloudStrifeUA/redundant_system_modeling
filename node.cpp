@@ -4,7 +4,7 @@
 #include "node.h"
 #include <algorithm>
 
-Node::Node(int numb):mu(0),n(numb),z(1e+06),t(n,0),m(0){}
+Node::Node(int numb):mu(0),n(numb),z(1e+06),t(n),m(0){}
 
 
 int Node::getMu() const {
@@ -33,6 +33,7 @@ void Node::setM(int var) {
 
 
 void Node::findMin() {
+    t.erase(std::remove(t.begin(),t.end(),0),t.end());
     if(!t.empty()) {
         double min = t[0];
         for (int i = 1; i < t.size(); ++i) {
@@ -49,7 +50,6 @@ void Node::subtractValue(double val) {
     for(; begin != t.end(); ++begin){
         *begin -= val;
     }
-    t.erase(std::remove(t.begin(),t.end(),0),t.end());
     findMin();
 }
 
